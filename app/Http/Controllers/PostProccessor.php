@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Session;
 
 class PostProccessor extends Controller
 {
@@ -21,7 +22,7 @@ class PostProccessor extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.add_edit');
     }
 
     /**
@@ -29,8 +30,34 @@ class PostProccessor extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Make image optional
+        ]);
+    
+        // Create a new Post instance
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->body = $request->input('description');
+    
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            
+            $path = $image->storeAs('public/images', $filename);
+            
+            $post->image = $filename; 
+        }
+    
+        $post->save();
+    
+        Session::flash('success', 'Post created successfully!');
+        return redirect()->route('admin.home');
     }
+    
 
     /**
      * Display the specified resource.
@@ -45,7 +72,8 @@ class PostProccessor extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.add_edit', compact('post'));
     }
 
     /**
