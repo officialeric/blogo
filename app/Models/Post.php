@@ -17,6 +17,7 @@ class Post extends Model
          'title',
          'body',
          'image',
+         'author_id',
      ];
  
      // Optionally specify attributes that should be cast to specific data types
@@ -24,4 +25,9 @@ class Post extends Model
          'created_at' => 'datetime',
          'updated_at' => 'datetime',
      ];
+
+     public function author(){
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
 }

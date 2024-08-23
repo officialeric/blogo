@@ -51,7 +51,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 truncate">{{ $post->body }}</td>
                       <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                         <a href="{{ route('admin.edit',['id' => $post->id]) }}" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Show</a>
-                        <a href="" class="inline-flex items-center ml-3 gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Delete</a>
+                        <a href="{{ route('admin.delete',['id' => $post->id]) }}" class="inline-flex items-center ml-3 gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">Delete</a>
                       </td>
                     </tr>
                   @empty

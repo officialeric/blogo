@@ -41,6 +41,7 @@ class PostProccessor extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('description');
+        $post->author_id = auth()->id();
     
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -89,6 +90,10 @@ class PostProccessor extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+        Session::flash('success','Post Deleted Successfully');
+        return redirect()->route('admin.home');
     }
 }
