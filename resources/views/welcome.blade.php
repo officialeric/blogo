@@ -34,7 +34,7 @@
             </div>
             <div class="">
                 <p class="text-sm">
-                    <p class="truncate">{{ $post->title }}</p>
+                    <p class="truncate">{{ $post->body }}</p>
                     <a href="" class="text-[#4C61A5]">Read more...</a>
                 </p>
             </div>
